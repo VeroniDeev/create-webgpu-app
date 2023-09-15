@@ -1,0 +1,13 @@
+{
+  "name": "create-webgpu-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "ansi-colors": "^4.1.3",
+    "enquirer": "^2.4.1"
+  },
+  "bin": {
+    "create-webgpu-app": "./index.js"
+  }
+}
