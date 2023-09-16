@@ -2,8 +2,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 const config = {
+  mode: "production",
   entry: {
-    main: "./src/index.js",
+    main: "./src/index.ts",
   },
   output: {
     filename: "bundle.js",
@@ -11,25 +12,21 @@ const config = {
   },
 
   resolve: {
-    extensions: [".js"],
+    extensions: [".js", ".ts"],
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          },
+          loader: "ts-loader",
         },
       },
-
       {
         test: /\.wgsl$/,
         use: {
-          loader: "raw-loader",
+          loader: "ts-shader-loader",
         },
       },
     ],

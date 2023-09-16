@@ -77,9 +77,13 @@ module.exports.askWebGPU = async () => {
     choices: [blueBright("Webpack"), magentaBright("Vite")],
   });
 
-  await askBundler.run().then((value) => {
-    allChoice.bundler = value;
-  });
+  const responseBundler = await askBundler.run();
+
+  if (responseBundler == blueBright("Webpack")) {
+    allChoice.bundler = "webpack";
+  } else if (responseBundler == magentaBright("Vite")) {
+    allChoice.bundler = "vite";
+  }
 
   const askLanguage = new AutoComplete({
     name: "language",
@@ -88,9 +92,13 @@ module.exports.askWebGPU = async () => {
     choices: [yellow("JavaScript"), blueBright("TypeScript")],
   });
 
-  await askLanguage.run().then((value) => {
-    allChoice.language = value;
-  });
+  const responseLanguage = await askLanguage.run();
+
+  if (responseLanguage == yellow("JavaScript")) {
+    allChoice.language = "javascript";
+  } else if (responseLanguage == blueBright("TypeScript")) {
+    allChoice.language = "typescript";
+  }
 
   const askName = new Input({
     name: "ask project name",
