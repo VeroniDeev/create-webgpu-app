@@ -49,7 +49,7 @@ const runCommand = {
   },
   vite: {
     dev: "vite",
-    build: "vite build",
+    build: "",
     preview: "vite preview",
   },
 };
@@ -122,6 +122,8 @@ const configuePackageAndBundler = (linkedPath, data, option) => {
   if (option.bundler == "webpack") {
     package.scripts = { ...runCommand.webpack };
   } else if (option.bundler == "vite") {
+    runCommand.vite.build =
+      option.language == "typescript" ? "tsc && vite build" : "vite build";
     package.scripts = { ...runCommand.vite };
   }
 
