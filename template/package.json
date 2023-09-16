@@ -4,18 +4,12 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-      "dev": "webpack serve --mode development --config ./webpack.config.js",
-      "build": "webpack --mode production --config ./webpack.config.js",
+      "dev": "webpack serve --mode development --config ./webpack.common.js",
+      "build": "webpack --mode production --config ./webpack.common.js",
       "serve": "live-server --cors --no-browser"
     },
     "dependencies": {
         "gl-matrix": "^3.4.3"
-    },
-    "devDependencies": {
-      "html-webpack-plugin": "^5.5.3",
-      "webpack": "^5.88.2",
-      "webpack-cli": "^5.1.4",
-      "webpack-dev-server": "^4.15.1"
     }
   }
   

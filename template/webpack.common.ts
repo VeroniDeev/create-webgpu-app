@@ -31,6 +31,11 @@ const config = {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "index.html",
+    }),
+  ],
   devServer: {
     port: 3000,
   },

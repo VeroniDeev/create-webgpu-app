@@ -1,4 +1,4 @@
-const { askWebGPU, bundler, help, language, version } = require("./askProject");
+// const { askWebGPU, bundler, help, language, version } = require("./askProject");
 const fs = require("fs");
 const path = require("path");
 
@@ -49,12 +49,20 @@ const packageDependence = {
     "ts-loader": "^9.4.4",
     "ts-shader-loader": "^2.0.2",
     typescript: "^5.2.2",
+    "html-webpack-plugin": "^5.5.3",
+    webpack: "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
   },
   webpackJavascript: {
     "babel-loader": "^8.0.0",
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "raw-loader": "^4.0.2",
+    "html-webpack-plugin": "^5.5.3",
+    webpack: "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
   },
   viteJavascript: {
     vite: "^4.4.9",
@@ -81,6 +89,14 @@ const readAndWrite = (linkedPath, data) => {
       if (file == "tsconfig.json") {
         copyFile(filepath, `${linkedPath}/${file}`);
         continue;
+      } else if (file == "shader.d.ts") {
+        fs.mkdirSync(`${linkedPath}/${data.parentDir}/types`, (err) => {
+          if (err) {
+            console.error(err);
+            process.exit(1);
+          }
+        });
+        copyFile(filepath, `${linkedPath}/${data.parentDir}/types/${file}`);
       }
       copyFile(filepath, `${linkedPath}/${data.parentDir}/${file}`);
     }
@@ -94,7 +110,7 @@ const configuePackageAndBundler = (linkedPath, data, option) => {
   if (option.language == "javascript") {
     package.main = "./src/index.js";
     if (option.bundler == "webpack") {
-      package.devDepedencies = {
+      package.devDependencies = {
         ...package.devDependencies,
         ...packageDependence.webpackJavascript,
       };
@@ -115,7 +131,7 @@ const configuePackageAndBundler = (linkedPath, data, option) => {
   } else if (option.language == "typescript") {
     package.main = "./src/index.ts";
     if (option.bundler == "webpack") {
-      package.devDepedencies = {
+      package.devDependencies = {
         ...package.devDependencies,
         ...packageDependence.webpackTypescript,
       };
@@ -144,10 +160,21 @@ const configuePackageAndBundler = (linkedPath, data, option) => {
   );
 };
 
-module.exports.createWebGPU = async () => {
-  const webGPUProjectData = await askWebGPU();
-  let linkedPath = `${process.cwd()}/${webGPUProjectData.name}`;
-  fs.mkdirSync(webGPUProjectData.name, (err) => {
+const copyShader = (linkedPath, data) => {
+  const path = `${linkedPath}/src/shaders`;
+  fs.mkdirSync(path, (err) => {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    }
+  });
+  copyFile(data.path, `${path}/${data.filename}`);
+};
+
+module.exports.createWebGPU = async (data) => {
+  // const data = await askWebGPU();
+  let linkedPath = `${process.cwd()}/${data.name}`;
+  fs.mkdirSync(data.name, (err) => {
     if (err) {
       console.error(err);
       process.exit(1);
@@ -161,11 +188,15 @@ module.exports.createWebGPU = async () => {
     }
   });
 
-  if (webGPUProjectData.language == "typescript") {
+  if (data.language == "typescript") {
     readAndWrite(linkedPath, pathProject.typescript);
-  } else if (webGPUProjectData.language == "javascript") {
+  } else if (data.language == "javascript") {
     readAndWrite(linkedPath, pathProject.javascript);
   }
 
-  configuePackageAndBundler(linkedPath, pathProject, webGPUProjectData);
+  copyFile(pathProject.html.path, `${linkedPath}/${pathProject.html.filename}`);
+
+  configuePackageAndBundler(linkedPath, pathProject, data);
+
+  copyShader(linkedPath, pathProject.wgsl);
 };
