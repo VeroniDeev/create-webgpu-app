@@ -20,7 +20,7 @@ Create-webgpu-app is a library for generating web-based applications using WebGP
 
 ## Preview
 
-[Demonstration of create-webgpu-app](demo.mp4)
+[Demonstration of create-webgpu-app](https://github.com/VeroniDeev/brzstreaming/assets/100876793/a6ee66d3-b6e4-4724-8261-02d64da23796)
 
 ## Requirement
 
