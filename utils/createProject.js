@@ -42,6 +42,18 @@ const pathProject = {
   },
 };
 
+const runCommand = {
+  webpack: {
+    dev: "webpack serve --mode development --config ./webpack.common.js",
+    build: "webpack --mode production --config ./webpack.common.js",
+  },
+  vite: {
+    dev: "vite",
+    build: "vite build",
+    preview: "vite preview",
+  },
+};
+
 const packageDependence = {
   webpackTypescript: {
     "@types/gl-matrix": "^3.2.0",
@@ -107,6 +119,12 @@ const configuePackageAndBundler = (linkedPath, data, option) => {
   const package = require(`${data.package.path}`);
   package.name = option.name;
 
+  if (option.bundler == "webpack") {
+    package.scripts = { ...runCommand.webpack };
+  } else if (option.bundler == "vite") {
+    package.scripts = { ...runCommand.vite };
+  }
+
   if (option.language == "javascript") {
     package.main = "./src/index.js";
     if (option.bundler == "webpack") {
@@ -144,6 +162,7 @@ const configuePackageAndBundler = (linkedPath, data, option) => {
         ...package.devDependencies,
         ...packageDependence.viteTypescript,
       };
+
       copyFile(
         data.viteTypescript.path,
         `${linkedPath}/${data.viteTypescript.filename}`
@@ -172,7 +191,6 @@ const copyShader = (linkedPath, data) => {
 };
 
 module.exports.createWebGPU = async (data) => {
-  // const data = await askWebGPU();
   let linkedPath = `${process.cwd()}/${data.name}`;
   fs.mkdirSync(data.name, (err) => {
     if (err) {

@@ -2,12 +2,36 @@
   "name": "create-webgpu-app",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
+  "license": "GPL-3.0",
   "dependencies": {
     "ansi-colors": "^4.1.3",
     "enquirer": "^2.4.1"
   },
   "bin": {
     "create-webgpu-app": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "webgpu",
+    "library",
+    "webgpu-app",
+    "webpack",
+    "vite"
+  ],
+  "homepage": "https://github.com/VeroniDeev/create-webgpu-app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VeroniDeev/create-webgpu-app.git"
+  },
+  "author": "VeroniDeev",
+  "description": "create-webgpu-app is a web application generator for WebGPU projects.",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/VeroniDeev/create-webgpu-app/issues"
   }
 }
