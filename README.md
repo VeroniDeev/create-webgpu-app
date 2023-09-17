@@ -6,7 +6,9 @@ Create-webgpu-app is a library for generating web-based applications using WebGP
 
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://choosealicense.com/licenses/gpl-3.0/)
 
-[![NPM info](https://img.shields.io/npm/v/create-webgpu-app?maxAge=3600)](https://www.npmjs.com/package/create-three-app)
+[![NPM info](https://img.shields.io/npm/v/create-webgpu-app?maxAge=3600)](https://www.npmjs.com/package/create-webgpu-app)
+
+[![NPM info](https://img.shields.io/npm/dt/create-webgpu-app?maxAge=3600)](https://www.npmjs.com/package/create-webgpu-app)
 
 [![NPM info](https://nodei.co/npm/create-webgpu-app.png?compact=true)](https://www.npmjs.com/package/create-webgpu-app)
 
