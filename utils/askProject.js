@@ -32,6 +32,19 @@ module.exports.version = () => {
   process.exit(0);
 };
 
+module.exports.afterFinish = (name) => {
+  console.log(`
+${blueBright("The project has been created")}
+${blueBright(
+  "Now, execute the following commands to start working on your project:"
+)}
+
+    ${green("cd")} ${yellow(name)}
+    ${green("yarn")} ${yellow("install")}
+    ${green("yarn")} ${yellow("run dev")}
+    `);
+};
+
 module.exports.askWebGPU = async () => {
   const allChoice = {
     bundler: "",
@@ -78,4 +91,6 @@ module.exports.askWebGPU = async () => {
   });
 
   await createWebGPU(allChoice);
+
+  return allChoice;
 };
