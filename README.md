@@ -27,7 +27,7 @@ Create-webgpu-app is a library for generating web-based applications using WebGP
 ## Requirement
 
 - **Node.js**: Make sur to have Node.js installed in your pc.
-- **Compatible navigator**: To run WebGPU application locally.
+- **Compatible navigator**: To run WebGPU application locally (we will recommend to use chrome canary with "Unsafe WebGPU Support" activate).
 
 ## Run Locally
 
